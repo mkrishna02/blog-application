@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService{
 	private UserRepo userRepo;
 	
 	@Autowired
-	private ModelMapper modelMapper; // to conver the object on one class into other that is user entity to user dto. 
+	private ModelMapper modelMapper; // to convert the object on one class into other that is user entity to user dto. 
 	
 	@Override
 	public UserDto createUser(UserDto userDto) {
