@@ -18,6 +18,8 @@ import com.learn.blog.payloads.ApiResponse;
 import com.learn.blog.payloads.CategoryDto;
 import com.learn.blog.services.CategoryService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/categories")
 public class CategoryController {
@@ -26,19 +28,19 @@ public class CategoryController {
 	private CategoryService catService;
 	// create
 	@PostMapping("/")
-	public ResponseEntity<CategoryDto> createCategory(@RequestBody CategoryDto catDto){
+	public ResponseEntity<CategoryDto> createCategory(@Valid @RequestBody CategoryDto catDto){
 		CategoryDto createCat =  this.catService.createCategory(catDto);
 		return new ResponseEntity<CategoryDto>(createCat, HttpStatus.CREATED);
 	}
 	// update
 	@PutMapping("/{catId}")
-	private ResponseEntity<CategoryDto> updateCategory(@RequestBody CategoryDto catDto, @PathVariable Integer catId){
+	private ResponseEntity<CategoryDto> updateCategory(@Valid @RequestBody CategoryDto catDto, @PathVariable Integer catId){
 		CategoryDto updatedCat = this.catService.updateCategory(catDto, catId);
 		return new ResponseEntity<CategoryDto>(updatedCat, HttpStatus.OK);
 	}
 	// delete
 	@DeleteMapping("/{catId}")
-	private ResponseEntity<ApiResponse> deleteCategory(Integer catId){
+	private ResponseEntity<ApiResponse> deleteCategory(@PathVariable Integer catId){
 		this.catService.deleteCategory(catId);
 		return new ResponseEntity<ApiResponse>(new ApiResponse("Category is deleted successfully.",true), HttpStatus.OK);
 	}
